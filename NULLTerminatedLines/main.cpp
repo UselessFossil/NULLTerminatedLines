@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include<Windows.h>
 using namespace std;
 
@@ -6,37 +6,40 @@ int StrLen(char str[]);
 void to_upper(char str[]);
 void to_lower(char str[]);
 void shrink(char str[]);
-bool is_palindrome(char str[]);
 void remove_symbol(char str[], char symbol);
+bool is_palindrome(char str[]);
+bool is_integer(char str[]);
+bool is_bin(char str[]);
+bool is_hex(char str[]);
 
 
 void main()
 {
 	setlocale(LC_ALL, "");
 
-	//char str[] = { 'H', 'e', 'l', 'l', 'o', 0 };
-	//char str[] = "Hello";
-	//cout << str << endl;
+//char str[] = { 'H', 'e', 'l', 'l', 'o', 0 };
+//char str[] = "Hello";
+//cout << str << endl;
 
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
-	const int n = 256;
-	char str[n] = "јргентина манит негра";
-	cout << "¬ведите строку: ";
-	//cin.getline(str, n);
-	cout << str << endl;
-	cout << is_palindrome(str) << endl;
-	cout << str << endl;
-	//cout << "ƒлина введЄнной строки: " << StrLen(str) << endl;
-
-	//to_upper(str);
-	//cout << str << endl;
-	//to_lower(str);
-	//cout << str << endl;
-
-	//shrink(str);
-	//cout << str << endl;
-
+SetConsoleCP(1251);
+SetConsoleOutputCP(1251);
+const int n = 256;
+char str[n];
+cout << "¬ведите строку: ";
+cin.getline(str, n);
+cout << str << endl;
+cout << is_palindrome(str) << endl;
+cout << is_integer(str) << endl;
+cout << is_bin(str) << endl;
+cout << is_hex(str) << endl;
+//cout << str << endl;
+//cout << "ƒлина введЄнной строки: " << StrLen(str) << endl;
+//to_upper(str);
+//cout << str << endl;
+//to_lower(str);
+//cout << str << endl;
+//shrink(str);
+//cout << str << endl;
 }
 
 int StrLen(char str[])
@@ -75,7 +78,8 @@ void shrink(char str[])
 {
 	for (int i = 0; str[i]; i++)
 	{
-		while(str[i] == ' ' && str[i+1] == ' ')
+		while (str[i] == ' ' && str[i + 1] == ' ')
+			//while (str[i] == ' ')
 		{
 			for (int j = i; str[j]; j++)str[j] = str[j + 1];
 		}
@@ -109,5 +113,32 @@ bool is_palindrome(char str[])
 		}
 	}
 	delete[] buffer;
+	return true;
+}
+
+bool is_integer(char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		while (str[i] < 48 || str[i] > 57)return false;
+	}
+	return true;
+}
+
+bool is_bin(char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		while (str[i] != 48 && str[i] != 49)return false;
+	}
+	return true;
+}
+
+bool is_hex(char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		while ((str[i] < 48 || str[i] > 57) && (str[i] < 65 || str[i] > 70))return false;
+	}
 	return true;
 }
